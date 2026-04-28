@@ -1,0 +1,191 @@
+:root {
+  --bg: #0b1e1c;
+  --bg-card: #122c29;
+  --bg-soft: #173834;
+  --primary: #34d399;
+  --primary-dark: #10b981;
+  --text: #ecfdf5;
+  --muted: #a7f3d0;
+  --danger: #f87171;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, "Segoe UI", sans-serif;
+  background: linear-gradient(160deg, #071311 0%, #0b1e1c 60%, #143733 100%);
+  color: var(--text);
+}
+
+.container {
+  width: min(1100px, 92vw);
+  margin: 0 auto;
+}
+
+.hero {
+  padding: 64px 0 32px;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 0.78rem;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(52, 211, 153, 0.15);
+  color: var(--muted);
+  border: 1px solid rgba(52, 211, 153, 0.3);
+}
+
+h1 {
+  margin: 14px 0 10px;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+}
+
+.hero p {
+  margin: 0;
+  color: var(--muted);
+  max-width: 700px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 18px;
+  padding-bottom: 56px;
+}
+
+@media (max-width: 920px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  border-radius: 16px;
+  background: rgba(18, 44, 41, 0.88);
+  border: 1px solid rgba(167, 243, 208, 0.15);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.24);
+}
+
+.section-header {
+  padding: 16px 18px;
+  border-bottom: 1px solid rgba(167, 243, 208, 0.18);
+}
+
+.section-title {
+  margin: 0;
+  font-size: 1.08rem;
+}
+
+.courts {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+}
+
+.court-item {
+  background: var(--bg-soft);
+  border-radius: 12px;
+  padding: 12px 14px;
+  border: 1px solid rgba(167, 243, 208, 0.15);
+}
+
+.court-item-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.court-name {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.meta {
+  color: var(--muted);
+  margin-top: 5px;
+  font-size: 0.9rem;
+}
+
+.price {
+  font-weight: 700;
+}
+
+.booking-form {
+  padding: 16px;
+  display: grid;
+  gap: 12px;
+}
+
+label {
+  display: grid;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+input,
+select {
+  width: 100%;
+  background: #0f2321;
+  color: var(--text);
+  border: 1px solid rgba(167, 243, 208, 0.28);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+}
+
+button {
+  border: 0;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 0.98rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: #022c22;
+}
+
+.bookings {
+  padding: 14px 16px 16px;
+}
+
+.booking-item {
+  background: #0f2321;
+  border: 1px solid rgba(167, 243, 208, 0.15);
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.booking-item h4 {
+  margin: 0 0 6px;
+}
+
+.booking-item p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.status {
+  min-height: 22px;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+.status.error {
+  color: var(--danger);
+}
