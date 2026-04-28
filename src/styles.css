@@ -152,6 +152,10 @@ button {
   color: #022c22;
 }
 
+.bookings-section {
+  margin-bottom: 60px;
+}
+
 .bookings {
   padding: 14px 16px 16px;
 }

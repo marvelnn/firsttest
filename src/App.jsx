@@ -1,5 +1,4 @@
-import React, { useMemo, useState } from "https://esm.sh/react@18.3.1";
-import { createRoot } from "https://esm.sh/react-dom@18.3.1/client";
+import { useMemo, useState } from "react";
 
 const courts = [
   { id: "c1", name: "Center Court", type: "Indoor", pricePerHour: 42, lights: true },
@@ -26,9 +25,8 @@ const timeSlots = [
   "21:00"
 ];
 
-function App() {
+export default function App() {
   const today = useMemo(() => new Date().toISOString().slice(0, 10), []);
-
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -77,8 +75,8 @@ function App() {
         <span className="badge">PADELBOOK</span>
         <h1>Book your next padel match in seconds.</h1>
         <p>
-          Choose your court, pick a time slot, and confirm your session instantly.
-          Great for casual games, training, and tournaments.
+          Choose your court, pick a time slot, and confirm your session instantly. Great for
+          casual games, training, and tournaments.
         </p>
       </section>
 
@@ -171,7 +169,7 @@ function App() {
         </aside>
       </section>
 
-      <section className="container card" style={{ marginBottom: "60px" }}>
+      <section className="container card bookings-section">
         <div className="section-header">
           <h2 className="section-title">Recent Bookings</h2>
         </div>
@@ -194,5 +192,3 @@ function App() {
     </>
   );
 }
-
-createRoot(document.getElementById("root")).render(<App />);
