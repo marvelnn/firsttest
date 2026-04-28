@@ -38,6 +38,15 @@ export default function App() {
   const [bookings, setBookings] = useState([]);
   const [status, setStatus] = useState("");
   const [isError, setIsError] = useState(false);
+  const [chatMessages, setChatMessages] = useState([
+    {
+      role: "assistant",
+      content:
+        "Hi! I am your Padel Coach bot. Ask me about technique, positioning, drills, or match strategy."
+    }
+  ]);
+  const [chatInput, setChatInput] = useState("");
+  const [isChatLoading, setIsChatLoading] = useState(false);
 
   function onChange(event) {
     const { name, value } = event.target;
@@ -67,6 +76,46 @@ export default function App() {
     setBookings((current) => [booking, ...current]);
     setStatus(`Booking confirmed for ${court.name} on ${form.date} at ${form.slot}.`);
     setForm((current) => ({ ...current, name: "", email: "" }));
+  }
+
+  async function onAskPadelTip(event) {
+    event.preventDefault();
+    const trimmed = chatInput.trim();
+    if (!trimmed || isChatLoading) return;
+
+    const userMessage = { role: "user", content: trimmed };
+    const nextMessages = [...chatMessages, userMessage];
+
+    setChatMessages(nextMessages);
+    setChatInput("");
+    setIsChatLoading(true);
+
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: nextMessages })
+      });
+
+      if (!response.ok) {
+        const errorBody = await response.json().catch(() => ({}));
+        throw new Error(errorBody.error || "Chat request failed.");
+      }
+
+      const data = await response.json();
+      setChatMessages((current) => [...current, { role: "assistant", content: data.reply }]);
+    } catch (error) {
+      setChatMessages((current) => [
+        ...current,
+        {
+          role: "assistant",
+          content:
+            "I could not reach the coach API right now. Please check your Vercel OPENAI_API_KEY."
+        }
+      ]);
+    } finally {
+      setIsChatLoading(false);
+    }
   }
 
   return (
@@ -187,6 +236,42 @@ export default function App() {
               </div>
             ))
           )}
+        </div>
+      </section>
+
+      <section className="container card chatbot-section">
+        <div className="section-header">
+          <h2 className="section-title">Padel Tips Chatbot</h2>
+        </div>
+        <div className="chatbot-wrap">
+          <div className="chat-feed">
+            {chatMessages.map((message, index) => (
+              <div
+                key={`${message.role}-${index}`}
+                className={`chat-bubble ${message.role === "user" ? "user" : "assistant"}`}
+              >
+                <strong>{message.role === "user" ? "You" : "Coach"}</strong>
+                <p>{message.content}</p>
+              </div>
+            ))}
+            {isChatLoading && (
+              <div className="chat-bubble assistant">
+                <strong>Coach</strong>
+                <p>Thinking...</p>
+              </div>
+            )}
+          </div>
+
+          <form className="chat-input-row" onSubmit={onAskPadelTip}>
+            <input
+              value={chatInput}
+              onChange={(event) => setChatInput(event.target.value)}
+              placeholder="Ask: How do I improve my bandeja?"
+            />
+            <button className="btn-primary" type="submit" disabled={isChatLoading}>
+              Send
+            </button>
+          </form>
         </div>
       </section>
     </>

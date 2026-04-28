@@ -193,3 +193,56 @@ button {
 .status.error {
   color: var(--danger);
 }
+
+.chatbot-section {
+  margin-bottom: 60px;
+}
+
+.chatbot-wrap {
+  padding: 16px;
+}
+
+.chat-feed {
+  max-height: 320px;
+  overflow-y: auto;
+  display: grid;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.chat-bubble {
+  border-radius: 12px;
+  padding: 10px 12px;
+  border: 1px solid rgba(167, 243, 208, 0.15);
+}
+
+.chat-bubble strong {
+  display: inline-block;
+  margin-bottom: 4px;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.chat-bubble p {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.chat-bubble.user {
+  background: #113b33;
+}
+
+.chat-bubble.assistant {
+  background: #0f2321;
+}
+
+.chat-input-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+}
+
+.chat-input-row button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
